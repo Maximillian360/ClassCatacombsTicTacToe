@@ -2,6 +2,10 @@
 
 public class Game
 {
-    Tile[,] Board {get; set;}
-    
+    private Player Player { get; set; }
+
+    Game(Player player)
+    {
+        Player = player;
+    }
 }
