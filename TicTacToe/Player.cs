@@ -2,23 +2,29 @@
 
 public class Player
 {
-    private string _playerInput = String.Empty;
+    private string _playerStringInput = String.Empty;
     private static int _number = 0;
 
-    public string PlayerInput
+    public string PlayerStringInput
     {
-        get => _playerInput;
+        get => _playerStringInput;
         set
         {
             if (InputIsNotNull(value) && InputIsInteger(value) && InputIsWithinNumberRange(_number))
             {
-                _playerInput = value;
+                _playerStringInput = value;
             }
         }
     }
-    public Player(string playerInput)
+
+    public int PlayerInputConverted
     {
-        PlayerInput = playerInput;
+        get => _number; 
+        
+    }
+    public Player(string playerStringInput)
+    {
+        PlayerStringInput = playerStringInput;
     }
 
     private static bool InputIsNotNull(string? input)
