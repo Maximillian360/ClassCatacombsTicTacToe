@@ -2,9 +2,9 @@
 
 public class Map
 {
-    Tile[,] Board {get; set;}
-    int Rows {get; set;}
-    int Cols {get; set;}
+    public Tile[,] Board {get; set;}
+    public int Rows {get; set;}
+    public int Cols {get; set;}
 
     public Map()
     {
@@ -22,10 +22,4 @@ public class Map
     {
         return TileIsInside(row, col) ? Board[row, col] : null;
     }
-
-    private bool TileIsOccupied(int row, int col)
-    {
-        return Board[row, col] != null;
-    }
-    
 }

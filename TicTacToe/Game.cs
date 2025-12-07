@@ -16,9 +16,13 @@ public class Game
         //Check if valid move (TileIsInside, TileIsOccupied
     }
 
-    public (int, int) PlayerInputConver()
+    public (int, int) PlayerInputConverter()
     {
         //Implement player's input from numbers 1-9 to (x, y)
-        return (0, 0);
+        while (true)
+        {
+            //placeholder
+        }
+       
     }
 }
