@@ -15,15 +15,26 @@ public class Game
 
     public void Play(Player player1, Player player2)
     {
-        //Check if valid move (TileIsInside, TileIsOccupied
+        while (true)
+        {
+            if (GameState == GameState.Won || GameState == GameState.Draw)
+            {
+                break;
+            }
+            
+        }
     }
 
     public (int, int) PlayerInputConverter()
     {
-        //Implement player's input from numbers 1-9 to (x, y)
-        int row = (Player.PlayerInputConverted - 1) / Map.Cols;
-        int col = (Player.PlayerInputConverted - 1) % Map.Cols;
+        int row = (Player.PlayerConvertedInput - 1) / Map.Cols;
+        int col = (Player.PlayerConvertedInput - 1) % Map.Cols;
         return (row, col);
+    }
+
+    public void GameRender()
+    {
+        
     }
 }
 

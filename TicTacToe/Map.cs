@@ -22,4 +22,23 @@ public class Map
     {
         return TileIsInside(row, col) ? Board[row, col] : null;
     }
+    
+    public void PlayMove(int row, int col)
+    {
+        //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.
+    }
+    
+    public bool CheckWinner(int row, int col)
+    {
+        //TODO: Determine if a move results in a win.
+        return false;
+    }
+    
+    public bool CheckDraw(int row, int col)
+    {
+        //TODO: Determine if a move results in a draw, where map is already filled but no win is flagged.
+        return false;
+    }
+
+   
 }

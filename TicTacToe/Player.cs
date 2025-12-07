@@ -2,45 +2,38 @@
 
 public class Player
 {
+    private int _playerConvertedInput = -1;
     private string _playerStringInput = String.Empty;
-    private static int _number = 0;
-
-    public string PlayerStringInput
-    {
-        get => _playerStringInput;
+    public string PlayerStringInput 
+    { 
+        get => _playerStringInput; 
         set
         {
-            if (InputIsNotNull(value) && InputIsInteger(value) && InputIsWithinNumberRange(_number))
-            {
-                _playerStringInput = value;
-            }
+            _playerStringInput = value?.Trim() ?? String.Empty;
+            TryConvertInput(_playerStringInput);
         }
     }
 
-    public int PlayerInputConverted
+    public int PlayerConvertedInput
     {
-        get => _number; 
-        
-    }
-    public Player(string playerStringInput)
-    {
-        PlayerStringInput = playerStringInput;
+        get => _playerConvertedInput;
     }
 
-    private static bool InputIsNotNull(string? input)
+    public bool TryConvertInput(string? input)
     {
-        return !string.IsNullOrWhiteSpace(input);
+        int number = -1;
+        if (string.IsNullOrEmpty(input)) return false;
+        input = input.Trim();
+        if (!int.TryParse(input, out number)) return false;
+        if (number < 1 || number > 9) return false;
+        _playerConvertedInput = number;
+        return true;
+
     }
 
-    private static bool InputIsInteger(string input)
+    public Player(string initialPlayerInput)
     {
-        return int.TryParse(input, out _number);
+        PlayerStringInput = initialPlayerInput;
     }
-
-    private static bool InputIsWithinNumberRange(int input)
-    {
-        return input >= 0 && input <= 9;
-    }
-    
-    
 }
+    
