@@ -2,15 +2,18 @@
 
 public class Game
 {
-    public Player Player { get; private set; }
+    public Player[] Player { get; private set; }
     public Map Map { get; private set; }
     public GameState GameState { get; private set; }
+    private int MoveCounter { get; set; }
+    private int TurnIndex { get; set; }
 
-    Game(Player player, Map map)
+    Game(Player[] player, Map map)
     {
         Player = player;
         Map = map;
         GameState = GameState.InProgress;
+        MoveCounter = 0;
     }
 
     public void Play(Player player1, Player player2)
@@ -27,8 +30,8 @@ public class Game
 
     public (int, int) PlayerInputConverter()
     {
-        int row = (Player.PlayerConvertedInput - 1) / Map.Cols;
-        int col = (Player.PlayerConvertedInput - 1) % Map.Cols;
+        int row = (Player[TurnIndex].PlayerConvertedInput - 1) / Map.Cols;
+        int col = (Player[TurnIndex].PlayerConvertedInput - 1) % Map.Cols;
         return (row, col);
     }
 
@@ -36,6 +39,9 @@ public class Game
     {
         
     }
+    
+    public void SwitchTurnIndicator() => TurnIndex = (TurnIndex == 0) ? 1 : 0;
+    
 }
 
 public enum GameState

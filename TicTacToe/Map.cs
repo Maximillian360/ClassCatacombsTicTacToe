@@ -25,12 +25,25 @@ public class Map
     
     public void PlayMove(int row, int col)
     {
+        if (!TileIsInside(row, col))
+        {
+            Console.WriteLine("Out of bounds.");
+            return;
+        }
+
+        if (GetTile(row, col) != null)
+        {
+            Console.WriteLine("Tile is occupied.");
+            return;
+        }
+        
         //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.
     }
     
     public bool CheckWinner(int row, int col)
     {
         //TODO: Determine if a move results in a win.
+        
         return false;
     }
     
