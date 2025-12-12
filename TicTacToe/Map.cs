@@ -30,7 +30,6 @@ public class Map
             Console.WriteLine("Out of bounds.");
             return;
         }
-
         if (GetTile(row, col) != null)
         {
             Console.WriteLine("Tile is occupied.");

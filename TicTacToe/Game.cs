@@ -22,6 +22,7 @@ public class Game
         {
             if (GameState == GameState.Won || GameState == GameState.Draw)
             {
+                Console.WriteLine("Game over.");
                 break;
             }
             
@@ -30,14 +31,20 @@ public class Game
 
     public (int, int) PlayerInputConverter()
     {
-        int row = (Player[TurnIndex].PlayerConvertedInput - 1) / Map.Cols;
-        int col = (Player[TurnIndex].PlayerConvertedInput - 1) % Map.Cols;
+        int row = (Player[TurnIndex].TryConvertInput() - 1) / Map.Cols;
+        int col = (Player[TurnIndex].TryConvertInput() - 1) % Map.Cols;
         return (row, col);
     }
 
     public void GameRender()
     {
-        
+        for (int i = 0; i < Map.Cols; i++)
+        {
+            for (int j = 0; j < Map.Rows; j++)
+            {
+                Console.WriteLine($" |{Map.GetTile(i, j)}| ");
+            }
+        }
     }
     
     public void SwitchTurnIndicator() => TurnIndex = (TurnIndex == 0) ? 1 : 0;
