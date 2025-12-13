@@ -23,7 +23,7 @@ public class Map
         return TileIsInside(row, col) ? Board[row, col] : null;
     }
     
-    public void PlayMove(int row, int col)
+    public void PlayTile(int row, int col)
     {
         if (!TileIsInside(row, col))
         {
@@ -35,6 +35,7 @@ public class Map
             Console.WriteLine("Tile is occupied.");
             return;
         }
+        
         
         //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.
     }

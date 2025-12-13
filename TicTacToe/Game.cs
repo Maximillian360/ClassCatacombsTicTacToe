@@ -16,7 +16,7 @@ public class Game
         MoveCounter = 0;
     }
 
-    public void Play(Player player1, Player player2)
+    public void GamePlay()
     {
         while (true)
         {
@@ -25,14 +25,23 @@ public class Game
                 Console.WriteLine("Game over.");
                 break;
             }
-            
+            Console.Clear();
+            GameRender();
+            PlayerInputConverter();
+
         }
     }
 
     public (int, int) PlayerInputConverter()
     {
-        int row = (Player[TurnIndex].TryConvertInput() - 1) / Map.Cols;
-        int col = (Player[TurnIndex].TryConvertInput() - 1) % Map.Cols;
+        int? numberInput = null;
+        while (numberInput == null)
+        {
+            numberInput = Player[TurnIndex].TryConvertInput();
+        }
+        int number = numberInput.Value;
+        int row = (number - 1) / Map.Cols;
+        int col = (number - 1) % Map.Cols;
         return (row, col);
     }
 
