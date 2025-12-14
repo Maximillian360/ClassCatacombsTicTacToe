@@ -2,23 +2,11 @@
 
 public class Player
 {
-    // private int _playerConvertedInput = -1;
-    // private string _playerStringInput = String.Empty;
-    // public string PlayerStringInput 
-    // { 
-    //     get => _playerStringInput; 
-    //     set
-    //     {
-    //         _playerStringInput = value?.Trim() ?? String.Empty;
-    //         TryConvertInput(_playerStringInput);
-    //     }
-    // }
-    //
-    // public int PlayerConvertedInput
-    // {
-    //     get => _playerConvertedInput;
-    // }
-
+    public CellState Glyph { get; private set; }
+    public Player(CellState playerGlyph =  CellState.None)
+    {
+        Glyph = playerGlyph;
+    }
     public int? TryConvertInput()
     {
         string? input = "";
@@ -44,8 +32,13 @@ public class Player
         return number;
     }
 
-    // public Player(string initialPlayerInput)
-    // {
-    //     PlayerStringInput = initialPlayerInput;
-    // }
+
+}
+
+
+public enum CellState
+{
+    None,
+    X,
+    O
 }

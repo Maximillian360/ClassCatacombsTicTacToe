@@ -2,7 +2,8 @@
 
 public class Map
 {
-    public Tile[,] Board {get; set;}
+    // public Tile[,] Board {get; set;}
+    private readonly CellState[,] _board;
     public int Rows {get; set;}
     public int Cols {get; set;}
 
@@ -10,7 +11,7 @@ public class Map
     {
         Rows = 3;
         Cols = 3;
-        Board = new Tile[Rows, Cols];
+        _board = new CellState[Rows, Cols];
     }
 
     public bool TileIsInside(int row, int col)
@@ -18,12 +19,12 @@ public class Map
         return row >= 0 && row < Rows && col >= 0 && col < Cols;
     }
 
-    public Tile? GetTile(int row, int col)
+    public CellState? GetTile(int row, int col)
     {
-        return TileIsInside(row, col) ? Board[row, col] : null;
+        return TileIsInside(row, col) ? _board[row, col] : null;
     }
     
-    public void PlayTile(int row, int col)
+    public void PlayTile(int row, int col, CellState glyph)
     {
         if (!TileIsInside(row, col))
         {
@@ -35,6 +36,8 @@ public class Map
             Console.WriteLine("Tile is occupied.");
             return;
         }
+        _board[row, col] = glyph;
+        
         
         
         //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.

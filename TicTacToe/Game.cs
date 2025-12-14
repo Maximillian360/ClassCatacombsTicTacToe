@@ -27,12 +27,13 @@ public class Game
             }
             Console.Clear();
             GameRender();
-            PlayerInputConverter();
+            (int, int) playerInput = PlayerInputConverter();
+            Map.PlayTile(playerInput.Item1, playerInput.Item2, Player[TurnIndex].Glyph);
 
         }
     }
 
-    public (int, int) PlayerInputConverter()
+    private (int, int) PlayerInputConverter()
     {
         int? numberInput = null;
         while (numberInput == null)
