@@ -7,6 +7,7 @@ public class Game
     public GameState GameState { get; private set; }
     private int MoveCounter { get; set; }
     private int TurnIndex { get; set; }
+    public Player? Winner {get; set;}
 
     Game(Player[] player, Map map)
     {
@@ -14,10 +15,12 @@ public class Game
         Map = map;
         GameState = GameState.InProgress;
         MoveCounter = 0;
+        Winner = null;
     }
 
     public void GamePlay()
     {
+        int moveCounter = 1;
         while (true)
         {
             if (GameState == GameState.Won || GameState == GameState.Draw)
@@ -27,8 +30,22 @@ public class Game
             }
             Console.Clear();
             GameRender();
+            
             (int, int) playerInput = PlayerInputConverter();
             Map.PlayTile(playerInput.Item1, playerInput.Item2, Player[TurnIndex].Glyph);
+            bool hasWinner = Map.CheckWin(playerInput.Item1, playerInput.Item2,  Player[TurnIndex].Glyph);
+            bool gameDraw = Map.CheckDraw(moveCounter, hasWinner);
+            moveCounter++;
+            if (hasWinner)
+            {
+                GameState = GameState.Won;
+                Winner = Player[TurnIndex];
+            }
+            else if (gameDraw)
+            {
+                GameState = GameState.Draw;
+            }
+            SwitchTurnIndicator();
 
         }
     }

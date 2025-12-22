@@ -7,6 +7,7 @@ public class Map
     public int Rows {get; set;}
     public int Cols {get; set;}
 
+
     public Map()
     {
         Rows = 3;
@@ -43,17 +44,26 @@ public class Map
         //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.
     }
     
-    public bool CheckWinner(int row, int col)
+    public bool CheckWin(int row, int col, CellState glyph)
     {
-        //TODO: Determine if a move results in a win.
-        
-        return false;
+        bool rowWin = true;
+        bool colWin = true;
+        bool diagonalWin = (row == col);
+        bool antiDiagonalWin = (row + col == (Rows * Cols) - 1);
+        for (int i = 0; i < (Rows * Cols); i++)
+        {
+            if (_board[row, i] != glyph) rowWin = false;
+            if (_board[i, col] != glyph) colWin = false;
+            if (diagonalWin && _board[i, i] != glyph) diagonalWin = false;
+            if (antiDiagonalWin && _board[i, (Rows * Cols) - 1 - i] != glyph) antiDiagonalWin = false;
+        }
+        return rowWin || colWin ||  diagonalWin || antiDiagonalWin;
+   
     }
     
-    public bool CheckDraw(int row, int col)
+    public bool CheckDraw(int moveCounter, bool hasWinner)
     {
-        //TODO: Determine if a move results in a draw, where map is already filled but no win is flagged.
-        return false;
+        return moveCounter == 9 && !hasWinner;
     }
 
    
