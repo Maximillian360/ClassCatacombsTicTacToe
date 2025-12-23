@@ -44,14 +44,14 @@ public class Map
     {
         bool rowWin = true;
         bool colWin = true;
-        bool diagonalWin = (row == col);
-        bool antiDiagonalWin = (row + col == (Rows * Cols) - 1);
+        bool diagonalWin = true;
+        bool antiDiagonalWin = true;
         for (int i = 0; i < Rows; i++)
         {
             if (_board[row, i] != glyph) rowWin = false;
             if (_board[i, col] != glyph) colWin = false;
             if (diagonalWin && _board[i, i] != glyph) diagonalWin = false;
-            if (antiDiagonalWin && _board[i, (Rows * Cols) - 1 - i] != glyph) antiDiagonalWin = false;
+            if (antiDiagonalWin && _board[i, Rows - 1 - i] != glyph) antiDiagonalWin = false;
         }
         return rowWin || colWin ||  diagonalWin || antiDiagonalWin;
     }

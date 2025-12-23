@@ -25,7 +25,8 @@ public class Game
         {
             if (GameState == GameState.Won || GameState == GameState.Draw)
             {
-                Console.WriteLine($"Game Over: {gameOverText}");
+                Console.WriteLine($"\nGame Over: {gameOverText}");
+                GameRender();
                 break;
             }
             Console.Clear();
@@ -38,7 +39,7 @@ public class Game
             if (hasWinner)
             {
                 GameState = GameState.Won;
-                gameOverText = $"{Player[TurnIndex]} Won!";
+                gameOverText = $"Player {TurnIndex} Won!";
                 Winner = Player[TurnIndex];
             }
             if (gameDraw)
@@ -47,7 +48,6 @@ public class Game
                 GameState = GameState.Draw;
             }
             SwitchTurnIndicator();
-
         }
     }
 
@@ -66,7 +66,7 @@ public class Game
 
     public void GameRender()
     {
-        Console.WriteLine($"Current Turn: {MoveCounter}");
+        Console.WriteLine($"Game: {GameState}, Current Turn: {MoveCounter}");
         for (int i = 0; i < Map.Cols; i++)
         {
             for (int j = 0; j < Map.Rows; j++)
