@@ -32,25 +32,21 @@ public class Map
             Console.WriteLine("Out of bounds.");
             return;
         }
-        if (GetTile(row, col) != null)
+        if (GetTile(row, col) != CellState.None)
         {
             Console.WriteLine("Tile is occupied.");
             return;
         }
         _board[row, col] = glyph;
         
-        
-        
-        //TODO: This method actualizes a player's move. Validate first if move is within bounds and is unoccupied.
     }
-    
     public bool CheckWin(int row, int col, CellState glyph)
     {
         bool rowWin = true;
         bool colWin = true;
         bool diagonalWin = (row == col);
         bool antiDiagonalWin = (row + col == (Rows * Cols) - 1);
-        for (int i = 0; i < (Rows * Cols); i++)
+        for (int i = 0; i < Rows; i++)
         {
             if (_board[row, i] != glyph) rowWin = false;
             if (_board[i, col] != glyph) colWin = false;
@@ -58,7 +54,6 @@ public class Map
             if (antiDiagonalWin && _board[i, (Rows * Cols) - 1 - i] != glyph) antiDiagonalWin = false;
         }
         return rowWin || colWin ||  diagonalWin || antiDiagonalWin;
-   
     }
     
     public bool CheckDraw(int moveCounter, bool hasWinner)

@@ -9,40 +9,41 @@ public class Game
     private int TurnIndex { get; set; }
     public Player? Winner {get; set;}
 
-    Game(Player[] player, Map map)
+    public Game(Player[] player, Map map)
     {
         Player = player;
         Map = map;
         GameState = GameState.InProgress;
-        MoveCounter = 0;
+        MoveCounter = 1;
         Winner = null;
     }
 
     public void GamePlay()
     {
-        int moveCounter = 1;
+        string gameOverText = "";
         while (true)
         {
             if (GameState == GameState.Won || GameState == GameState.Draw)
             {
-                Console.WriteLine("Game over.");
+                Console.WriteLine($"Game Over: {gameOverText}");
                 break;
             }
             Console.Clear();
             GameRender();
-            
             (int, int) playerInput = PlayerInputConverter();
             Map.PlayTile(playerInput.Item1, playerInput.Item2, Player[TurnIndex].Glyph);
             bool hasWinner = Map.CheckWin(playerInput.Item1, playerInput.Item2,  Player[TurnIndex].Glyph);
-            bool gameDraw = Map.CheckDraw(moveCounter, hasWinner);
-            moveCounter++;
+            bool gameDraw = Map.CheckDraw(MoveCounter, hasWinner);
+            MoveCounter++;
             if (hasWinner)
             {
                 GameState = GameState.Won;
+                gameOverText = $"{Player[TurnIndex]} Won!";
                 Winner = Player[TurnIndex];
             }
-            else if (gameDraw)
+            if (gameDraw)
             {
+                gameOverText = "Game Draw!";
                 GameState = GameState.Draw;
             }
             SwitchTurnIndicator();
@@ -65,12 +66,14 @@ public class Game
 
     public void GameRender()
     {
+        Console.WriteLine($"Current Turn: {MoveCounter}");
         for (int i = 0; i < Map.Cols; i++)
         {
             for (int j = 0; j < Map.Rows; j++)
             {
-                Console.WriteLine($" |{Map.GetTile(i, j)}| ");
+                Console.Write($" |{Map.GetTile(i, j)}| ");
             }
+            Console.WriteLine();
         }
     }
     
